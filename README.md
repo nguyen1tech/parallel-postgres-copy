@@ -7,15 +7,14 @@ A simple python script to run Postgres COPY command in parallel, no external pac
 ## 1. Update the `config.ini` file, eg:
 
 ```
-[Database]
-hostname = localhost
-port = 5432
-user = postgres
-password = changeme
-database = copy-test-db
 [Source]:
   data_dir = /home/data/parallel-postgres-copy/datasets
 [Target]:
+  hostname = localhost
+  port = 5432
+  user = postgres
+  password = changeme
+  database = copy-test-db
   schema = music
   table = songs
 [Resource]
