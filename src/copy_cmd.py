@@ -29,8 +29,10 @@ def run_copy_cmd(data_file: str, target_config: TargetConfig) -> None:
         print(
             f"[Process ID]:{process_id} - Run COPY on data file: {data_file}, status: Failed, exit_code: {result.returncode}, error: {result.stderr}"
         )
-    else:
-        inserted_rows = result.stdout[:-1]
-        print(
-            f"[Process ID]:{process_id} - Run COPY on data file: {data_file}, status: Succeeded, exit_code: {result.returncode}, output: {inserted_rows} rows, took: {time() - start} seconds"
-        )
+        return "F-0"
+
+    inserted_rows = int(result.stdout.split(" ")[1])
+    print(
+        f"[Process ID]:{process_id} - Run COPY on data file: {data_file}, status: Succeeded, exit_code: {result.returncode}, output: {inserted_rows} rows, took: {time() - start} seconds"
+    )
+    return f"S-{inserted_rows}"
