@@ -1,6 +1,7 @@
 import os
 from concurrent.futures import ProcessPoolExecutor
 from itertools import repeat
+from time import time
 
 from config import Config, load_config
 from copy_cmd import run_copy_cmd
@@ -22,4 +23,7 @@ if __name__ == "__main__":
     # Load config
     config = load_config()
     # Run the copy cmd in parallel
+    start = time()
     run_copy_parallel(config=config)
+    end = time()
+    print(f"Took {end - start} seconds")

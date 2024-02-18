@@ -1,11 +1,13 @@
 import os
 import subprocess
+from time import time
 from config import DatabaseConfig, TargetConfig
 
 
 def run_copy_cmd(
     database_config: DatabaseConfig, target_config: TargetConfig, data_file: str
 ) -> None:
+    start = time()
     copy_cmd = f"""PGPASSWORD="{database_config.password}" \
         psql -h "{database_config.hostname}" \
             -p "{database_config.port}" \
@@ -22,5 +24,5 @@ def run_copy_cmd(
     else:
         inserted_rows = result.stdout[:-1]
         print(
-            f"[Process ID]:{process_id} - Run COPY on data file: {data_file}, status: Succeeded, exit_code: {result.returncode}, output: {inserted_rows} rows"
+            f"[Process ID]:{process_id} - Run COPY on data file: {data_file}, status: Succeeded, exit_code: {result.returncode}, output: {inserted_rows} rows, took: {time() - start} seconds"
         )
