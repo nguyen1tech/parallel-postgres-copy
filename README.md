@@ -27,3 +27,7 @@ database = copy-test-db
 ```
 python src/main.py
 ```
+
+# Notes
+
+- Currently only `csv` format is supported.
